@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('createAccount', [AccountsController::class, 'createAccount'])->middleware('auth:sanctum');
-Route::get('getAccounts', [AccountsController::class, 'getAccounts']);
+Route::post('getAccounts', [AccountsController::class, 'getAccounts'])->middleware('auth:sanctum');
 Route::post('getAccountTransactions', [TransactionsController::class, 'getTransactions'])->middleware('auth:sanctum');
 Route::post("login",[UserController::class,'login']);
 Route::post("register",[UserController::class,'register']);
