@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Transactions extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'amount', 'activity_id','account_number'];
+    protected $fillable = ['user_id', 'amount', 'activity_id','account_number','remarks'];
     public $table = 'account_transaction';
 }
