@@ -11,11 +11,13 @@ class TransactionsController extends Controller
     public function getTransactions(Request $request){
         $data = $request->all();
         if(!empty($data)){
-            $transactions = Transactions::where('user_id', $data['user_id'])->where('account_number', $data['account_number'])->get();
+            $transactions = Transactions::where('user_id', $data['user_id'])
+            ->join("activity","activity.id","=","account_transaction.activity_id")
+            ->where('account_number', $data['account_number'])->get();
             if(!empty($transactions[0])){
-                return response()->json(['success'=>true,'message'=>"Transactions found successfully", 'transactions'=>$transactions]);
+                return response()->json(['success'=>true,"code"=>200,'message'=>"Transactions found successfully", 'data'=>$transactions]);
             }else{
-                return response()->json(['success'=>true, 'message'=>'No transactions found']);
+                return response()->json(['success'=>true, "code"=>200,'message'=>'No transactions found',"data"=>[]]);
             }
         }else{
             return response()->json(['success'=>false, 'message'=>'Invalid request']);
