@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\OauthAccessTokens;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -30,6 +32,15 @@ class UserController extends Controller
         ];
 
         return response($response, 201);
+    }
+    public function logout(Request $request)
+    {
+        $user = DB::table('personal_access_tokens')->where('tokenable_id', $request->user_id)->delete();
+        if (!$user) {
+            return response()->json(['error' => true], 200);
+        } else {
+            return response()->json(['success' => true], 200);
+        }
     }
     public function register(Request $request)
     {

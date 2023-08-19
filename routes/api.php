@@ -12,4 +12,5 @@ Route::post('createAccount', [AccountsController::class, 'createAccount'])->midd
 Route::post('getAccounts', [AccountsController::class, 'getAccounts'])->middleware('auth:sanctum');
 Route::post('getAccountTransactions', [TransactionsController::class, 'getTransactions'])->middleware('auth:sanctum');
 Route::post("login",[UserController::class,'login']);
+Route::post('logout', [UserController::class, 'logout']);
 Route::post("register",[UserController::class,'register']);
